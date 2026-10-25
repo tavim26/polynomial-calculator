@@ -1,7 +1,7 @@
-package BusinessLogic;
+package io.github.tavim26.polynomial.logic;
 
-import Model.Monomial;
-import Model.Polynomial;
+import io.github.tavim26.polynomial.model.Monomial;
+import io.github.tavim26.polynomial.model.Polynomial;
 
 import java.util.*;
 

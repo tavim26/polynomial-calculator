@@ -1,4 +1,4 @@
-package GUI;
+package io.github.tavim26.polynomial.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,11 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CalculatorView extends Application {
+public class CalculatorApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/SceneBuilder/calculator.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("calculator.fxml"));
         primaryStage.setTitle("Polynomial Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
