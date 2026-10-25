@@ -1,5 +1,6 @@
 package io.github.tavim26.polynomial.gui;
 
+import io.github.tavim26.polynomial.logic.DivisionResult;
 import io.github.tavim26.polynomial.logic.Operations;
 import io.github.tavim26.polynomial.model.InvalidPolynomialException;
 import io.github.tavim26.polynomial.model.Polynomial;
@@ -24,7 +25,6 @@ public class CalculatorController {
     @FXML
     private Label errorLabel;
 
-    private final Operations operations = new Operations();
     private TextField activeField;
 
     @FXML
@@ -66,43 +66,49 @@ public class CalculatorController {
         activeField.forward();
     }
 
-    @FXML
-    private void onClearClick() {
-        activeField.clear();
-    }
-
     // ---------- Operations ----------
 
     @FXML
     private void onAddClick() {
-        calculate(() -> operations.add(parse(field1, "P1"), parse(field2, "P2")));
+        calculate(() -> Operations.add(parse(field1, "P1"), parse(field2, "P2")));
     }
 
     @FXML
     private void onSubtractClick() {
-        calculate(() -> operations.subtract(parse(field1, "P1"), parse(field2, "P2")));
+        calculate(() -> Operations.subtract(parse(field1, "P1"), parse(field2, "P2")));
     }
 
     @FXML
     private void onMultiplyClick() {
-        calculate(() -> operations.multiply(parse(field1, "P1"), parse(field2, "P2")));
+        calculate(() -> Operations.multiply(parse(field1, "P1"), parse(field2, "P2")));
+    }
+
+    @FXML
+    private void onDivideClick() {
+        calculate(() -> {
+            DivisionResult result = Operations.divide(parse(field1, "P1"), parse(field2, "P2"));
+            return "Q: " + result.quotient() + "   R: " + result.remainder();
+        });
     }
 
     @FXML
     private void onDerivativeClick() {
-        calculate(() -> operations.derivate(parse(field1, "P1")));
+        calculate(() -> Operations.derivative(parse(field1, "P1")));
     }
 
     @FXML
     private void onIntegralClick() {
-        calculate(() -> operations.integrate(parse(field1, "P1")));
+        calculate(() -> {
+            Polynomial integral = Operations.integral(parse(field1, "P1"));
+            return integral.isZero() ? "C" : integral + "+C";
+        });
     }
 
-    private void calculate(Supplier<Polynomial> operation) {
+    private void calculate(Supplier<?> operation) {
         try {
-            resultField.setText(operation.get().toString());
+            resultField.setText(String.valueOf(operation.get()));
             errorLabel.setText("");
-        } catch (InvalidPolynomialException e) {
+        } catch (InvalidPolynomialException | ArithmeticException e) {
             resultField.clear();
             errorLabel.setText(e.getMessage());
         }

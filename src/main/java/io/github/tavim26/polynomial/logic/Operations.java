@@ -2,174 +2,81 @@ package io.github.tavim26.polynomial.logic;
 
 import io.github.tavim26.polynomial.model.Monomial;
 import io.github.tavim26.polynomial.model.Polynomial;
+import io.github.tavim26.polynomial.model.Rational;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Operations {
+/** Arithmetic and calculus operations on polynomials. */
+public final class Operations {
 
-
-    public Polynomial add(Polynomial polynomial1, Polynomial polynomial2)
-    {
-        Polynomial result = new Polynomial();
-        Map<Integer, Monomial> resultMonomials = new HashMap<>();
-
-        // se pun monoamele din primul polinom in rezultat
-        for (Map.Entry<Integer, Monomial> entry : polynomial1.getMonomials().entrySet())
-        {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-            resultMonomials.put(degree, new Monomial(monomial.getDegree(), monomial.getCoefficient()));
-        }
-
-        // se pun monoamele din al doilea polinom in rezultat
-        for (Map.Entry<Integer, Monomial> entry : polynomial2.getMonomials().entrySet())
-        {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-
-
-            if (resultMonomials.containsKey(degree))
-            {
-                Monomial existingMonomial = resultMonomials.get(degree);
-                existingMonomial.setCoefficient(existingMonomial.getCoefficient() + monomial.getCoefficient());
-            }
-            else
-            {
-                resultMonomials.put(degree, new Monomial(monomial.getDegree(), monomial.getCoefficient()));
-            }
-        }
-
-        result.setMonomials(resultMonomials);
-        return result;
+    private Operations() {
     }
 
-
-    public Polynomial subtract(Polynomial polynomial1, Polynomial polynomial2)
-    {
-        Polynomial result = new Polynomial();
-        Map<Integer, Monomial> resultMonomials = new HashMap<>();
-
-        for (Map.Entry<Integer, Monomial> entry : polynomial1.getMonomials().entrySet())
-        {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-            resultMonomials.put(degree, new Monomial(monomial.getDegree(), monomial.getCoefficient()));
-        }
-
-        for (Map.Entry<Integer, Monomial> entry : polynomial2.getMonomials().entrySet())
-        {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-
-
-            if (resultMonomials.containsKey(degree))
-            {
-
-                Monomial existingMonomial = resultMonomials.get(degree);
-                existingMonomial.setCoefficient(existingMonomial.getCoefficient() - monomial.getCoefficient());
-            }
-            else
-            {
-                resultMonomials.put(degree, new Monomial(monomial.getDegree(), -monomial.getCoefficient()));
-            }
-        }
-
-        result.setMonomials(resultMonomials);
-        return result;
+    public static Polynomial add(Polynomial first, Polynomial second) {
+        List<Monomial> terms = new ArrayList<>(first.monomials());
+        terms.addAll(second.monomials());
+        return Polynomial.of(terms);
     }
 
+    public static Polynomial negate(Polynomial polynomial) {
+        return Polynomial.of(polynomial.monomials().stream()
+                .map(Monomial::negate)
+                .toList());
+    }
 
-    public Polynomial multiply(Polynomial polynomial1, Polynomial polynomial2)
-    {
-        Polynomial result = new Polynomial();
+    public static Polynomial subtract(Polynomial first, Polynomial second) {
+        return add(first, negate(second));
+    }
 
-        // se parcurge fiecare monom din primul polinom
-        for (Map.Entry<Integer, Monomial> entry1 : polynomial1.getMonomials().entrySet())
-        {
-            int degree1 = entry1.getKey();
-            Monomial monomial1 = entry1.getValue();
-
-            // se parcurge fiecare monom din al doilea polinom
-            for (Map.Entry<Integer, Monomial> entry2 : polynomial2.getMonomials().entrySet())
-            {
-                int degree2 = entry2.getKey();
-                Monomial monomial2 = entry2.getValue();
-
-                // se inmultesc coeficientii si se aduna gradele
-                int resultDegree = degree1 + degree2;
-                int resultCoefficient = monomial1.getCoefficient() * monomial2.getCoefficient();
-
-                //daca rez inmultirii exista deja in result, atunci se aduna coeficientul
-                if (result.getMonomials().containsKey(resultDegree))
-                {
-                    Monomial existingMonomial = result.getMonomials().get(resultDegree);
-                    existingMonomial.setCoefficient(existingMonomial.getCoefficient() + resultCoefficient);
-                }
-                //altfel, se adauga rezultatul inmultirii in result
-                else
-                {
-                    result.getMonomials().put(resultDegree, new Monomial(resultDegree, resultCoefficient));
-                }
+    public static Polynomial multiply(Polynomial first, Polynomial second) {
+        List<Monomial> products = new ArrayList<>();
+        for (Monomial a : first.monomials()) {
+            for (Monomial b : second.monomials()) {
+                products.add(a.multiply(b));
             }
         }
-
-        return result;
+        return Polynomial.of(products);
     }
 
-
-
-
-
-
-
-
-    public Polynomial derivate(Polynomial polynomial)
-    {
-        Polynomial result = new Polynomial();
-
-        //se parcurge fiecare monom din polinomul dat
-        for (Map.Entry<Integer, Monomial> entry : polynomial.getMonomials().entrySet())
-        {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-
-            //se aplica regula de derivare a unui monom
-            int derivativeCoefficient = monomial.getCoefficient() * degree;
-            int derivativeDegree = degree - 1;
-
-
-            if (derivativeDegree >= 0 && derivativeCoefficient != 0)
-            {
-                result.getMonomials().put(derivativeDegree, new Monomial(derivativeDegree, derivativeCoefficient));
-            }
-
-
+    /**
+     * Polynomial long division.
+     *
+     * @throws ArithmeticException if the divisor is the zero polynomial
+     */
+    public static DivisionResult divide(Polynomial dividend, Polynomial divisor) {
+        if (divisor.isZero()) {
+            throw new ArithmeticException("Cannot divide by the zero polynomial");
         }
 
-        return result;
-    }
+        Monomial divisorLeadingTerm = divisor.leadingTerm();
+        Polynomial quotient = Polynomial.ZERO;
+        Polynomial remainder = dividend;
 
-
-    public Polynomial integrate(Polynomial polynomial) {
-        Polynomial result = new Polynomial();
-
-        // Se parcurge fiecare monom din polinomul dat
-        for (Map.Entry<Integer, Monomial> entry : polynomial.getMonomials().entrySet()) {
-            int degree = entry.getKey();
-            Monomial monomial = entry.getValue();
-
-            // Se calculează coeficientul integrat și gradul integrat
-            int integratedCoefficient = monomial.getCoefficient() / (degree + 1);
-            int integratedDegree = degree + 1;
-
-            // Se adaugă monomul integrat în polinomul rezultat
-            result.addMonomial(new Monomial(integratedDegree, integratedCoefficient));
+        while (!remainder.isZero() && remainder.degree() >= divisorLeadingTerm.degree()) {
+            Polynomial step = Polynomial.of(remainder.leadingTerm().divide(divisorLeadingTerm));
+            quotient = add(quotient, step);
+            remainder = subtract(remainder, multiply(step, divisor));
         }
 
-        return result;
+        return new DivisionResult(quotient, remainder);
     }
 
+    public static Polynomial derivative(Polynomial polynomial) {
+        return Polynomial.of(polynomial.monomials().stream()
+                .filter(monomial -> monomial.degree() > 0)
+                .map(monomial -> new Monomial(
+                        monomial.degree() - 1,
+                        monomial.coefficient().multiply(Rational.of(monomial.degree()))))
+                .toList());
+    }
 
-
-
+    /** Antiderivative without the integration constant. */
+    public static Polynomial integral(Polynomial polynomial) {
+        return Polynomial.of(polynomial.monomials().stream()
+                .map(monomial -> new Monomial(
+                        monomial.degree() + 1,
+                        monomial.coefficient().divide(Rational.of(monomial.degree() + 1))))
+                .toList());
+    }
 }

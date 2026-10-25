@@ -1,41 +1,48 @@
 package io.github.tavim26.polynomial.model;
 
-public class Monomial {
+import java.util.Objects;
 
-    private final int degree;
-    private int coefficient;
+/**
+ * Immutable term of the form {@code coefficient * x^degree}.
+ */
+public record Monomial(int degree, Rational coefficient) {
 
-    public Monomial(int degree, int coefficient) {
-        this.degree = degree;
-        this.coefficient = coefficient;
+    public Monomial {
+        if (degree < 0) {
+            throw new IllegalArgumentException("Degree must be non-negative: " + degree);
+        }
+        Objects.requireNonNull(coefficient, "coefficient");
     }
 
-    public int getDegree() {
-        return degree;
+    public Monomial negate() {
+        return new Monomial(degree, coefficient.negate());
     }
 
-    public int getCoefficient() {
-        return coefficient;
+    public Monomial multiply(Monomial other) {
+        return new Monomial(degree + other.degree, coefficient.multiply(other.coefficient));
     }
 
-    public void setCoefficient(int coefficient) {
-        this.coefficient = coefficient;
+    public Monomial divide(Monomial other) {
+        return new Monomial(degree - other.degree, coefficient.divide(other.coefficient));
     }
 
     @Override
     public String toString() {
-        if (coefficient == 0) {
+        if (coefficient.isZero()) {
             return "0";
         }
         if (degree == 0) {
-            return String.valueOf(coefficient);
+            return coefficient.toString();
         }
 
-        String coefficientPart = switch (coefficient) {
-            case 1 -> "";
-            case -1 -> "-";
-            default -> String.valueOf(coefficient);
-        };
+        String coefficientPart;
+        if (coefficient.equals(Rational.ONE)) {
+            coefficientPart = "";
+        } else if (coefficient.equals(Rational.ONE.negate())) {
+            coefficientPart = "-";
+        } else {
+            coefficientPart = coefficient.toString();
+        }
         String powerPart = (degree == 1) ? "" : "^" + degree;
 
         return coefficientPart + "x" + powerPart;

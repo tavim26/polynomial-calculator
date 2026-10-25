@@ -47,7 +47,11 @@
          <Button text="MUL" styleClass="operation" onAction="#onMultiplyClick"/>
       </HBox>
       <HBox spacing="10" alignment="CENTER">
-         <Button text="DIV" styleClass="operation" disable="true"/>
+         <Button text="DIV" styleClass="operation" onAction="#onDivideClick">
+            <tooltip>
+               <Tooltip text="P1 divided by P2: quotient (Q) and remainder (R)"/>
+            </tooltip>
+         </Button>
          <Button text="DER" styleClass="operation" onAction="#onDerivativeClick">
             <tooltip>
                <Tooltip text="Derivative of P1"/>
@@ -88,7 +92,7 @@
          <Region prefWidth="12"/>
          <Button text="←" styleClass="key" focusTraversable="false" onAction="#onCaretLeftClick"/>
          <Button text="→" styleClass="key" focusTraversable="false" onAction="#onCaretRightClick"/>
-         <Button text="C" styleClass="key" focusTraversable="false" onAction="#onClearClick"/>
+         <Button text="/" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
       </HBox>
    </VBox>
 </VBox>
