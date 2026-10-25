@@ -1,11 +1,10 @@
-package GUI;
+package io.github.tavim26.polynomial.gui;
 
-import BusinessLogic.Operations;
-import Model.Polynomial;
+import io.github.tavim26.polynomial.logic.Operations;
+import io.github.tavim26.polynomial.model.Polynomial;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import jdk.incubator.vector.VectorOperators;
 
 public class CalculatorController {
 

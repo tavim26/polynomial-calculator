@@ -1,4 +1,4 @@
-package Model;
+package io.github.tavim26.polynomial.model;
 
 public class Monomial {
 
