@@ -4,253 +4,91 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="381.0" style="-fx-background-color: #2297c9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.tavim26.polynomial.gui.CalculatorController">
-   <top>
-      <AnchorPane prefHeight="65.0" prefWidth="329.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="TOP_CENTER" layoutX="5.0" layoutY="17.0" prefHeight="29.0" prefWidth="372.0" text="Polynomial Calculator" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <AnchorPane prefHeight="311.0" prefWidth="382.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="BOTTOM_CENTER" layoutX="5.0" layoutY="125.0" prefHeight="181.0" prefWidth="187.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="59.0" prefWidth="187.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="oneButton" mnemonicParsing="false" onAction="#oneClick" prefHeight="46.0" prefWidth="54.0" text="1">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="twoButton" mnemonicParsing="false" onAction="#twoClick" prefHeight="46.0" prefWidth="54.0" text="2">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="threeButton" mnemonicParsing="false" onAction="#threeClick" prefHeight="46.0" prefWidth="54.0" text="3">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="180.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="fourButton" mnemonicParsing="false" onAction="#fourClick" prefHeight="46.0" prefWidth="54.0" text="4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="fiveButton" mnemonicParsing="false" onAction="#fiveClick" prefHeight="46.0" prefWidth="54.0" text="5">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="sixButton" mnemonicParsing="false" onAction="#sixClick" prefHeight="46.0" prefWidth="54.0" text="6">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="180.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="sevenButton" mnemonicParsing="false" onAction="#sevenClick" prefHeight="46.0" prefWidth="54.0" text="7">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="eightButton" mnemonicParsing="false" onAction="#eightClick" prefHeight="46.0" prefWidth="54.0" text="8">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="nineButton" mnemonicParsing="false" onAction="#nineClick" prefHeight="46.0" prefWidth="54.0" text="9">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="190.0" layoutY="123.0" prefHeight="184.0" prefWidth="191.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="180.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="zeroButton" mnemonicParsing="false" onAction="#zeroClick" prefHeight="46.0" prefWidth="54.0" text="0">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusClick" prefHeight="46.0" prefWidth="54.0" text="+">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="minusButton" mnemonicParsing="false" onAction="#minusClick" prefHeight="46.0" prefWidth="54.0" text="-">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="168.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="slashButton" mnemonicParsing="false" onAction="#slashClick" prefHeight="46.0" prefWidth="54.0" text="/">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="dinkusButton" mnemonicParsing="false" onAction="#dinkusClick" prefHeight="46.0" prefWidth="54.0" text="*">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="circumfelxButton" mnemonicParsing="false" onAction="#circumfelxClick" prefHeight="46.0" prefWidth="54.0" text="^">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="180.0" spacing="5.0">
-                     <children>
-                        <Button fx:id="dotButton" mnemonicParsing="false" onAction="#dotClick" prefHeight="46.0" prefWidth="54.0" text=".">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#xClick" prefHeight="46.0" prefWidth="54.0" text="x" fx:id="xButton">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="delButton" mnemonicParsing="false" onAction="#delClick" prefHeight="46.0" prefWidth="57.0" text="del">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="113.0" prefWidth="369.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="322.0" spacing="10.0">
-                     <children>
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="ADD" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="subButton" mnemonicParsing="false" onAction="#subClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="SUB" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="mulButton" mnemonicParsing="false" onAction="#mulClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="MUL" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="322.0" spacing="10.0">
-                     <children>
-                        <Button fx:id="divButon" mnemonicParsing="false" onAction="#divClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="DIV" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="derButton" mnemonicParsing="false" onAction="#derClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="DER" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="intButton" mnemonicParsing="false" onAction="#intClick" prefHeight="39.0" prefWidth="108.0" style="-fx-background-radius: 30; -fx-background-color: #498199;" text="INT" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-   </bottom>
-   <center>
-      <AnchorPane prefHeight="247.0" prefWidth="381.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" layoutX="7.0" layoutY="4.0" prefHeight="220.0" prefWidth="356.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="306.0">
-                     <children>
-                        <Label prefHeight="25.0" prefWidth="77.0" text="P1" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="field1" prefHeight="35.0" prefWidth="209.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="306.0">
-                     <children>
-                        <Label prefHeight="25.0" prefWidth="77.0" text="P2" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="field2" prefHeight="35.0" prefWidth="209.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="306.0">
-                     <children>
-                        <Label prefHeight="25.0" prefWidth="77.0" text="R" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="fieldr" editable="false" prefHeight="35.0" prefWidth="209.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="io.github.tavim26.polynomial.gui.CalculatorController"
+      stylesheets="@calculator.css"
+      alignment="TOP_CENTER" spacing="14">
+
+   <padding>
+      <Insets top="20" right="16" bottom="20" left="16"/>
+   </padding>
+
+   <Label text="Polynomial Calculator" styleClass="title"/>
+
+   <!-- Input and result fields -->
+   <VBox spacing="10">
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <Label text="P1" styleClass="field-label"/>
+         <TextField fx:id="field1" promptText="e.g. 3x^2 - x + 5" HBox.hgrow="ALWAYS"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <Label text="P2" styleClass="field-label"/>
+         <TextField fx:id="field2" promptText="e.g. x - 1" HBox.hgrow="ALWAYS"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER_LEFT">
+         <Label text="R" styleClass="field-label"/>
+         <TextField fx:id="resultField" editable="false" focusTraversable="false"
+                    HBox.hgrow="ALWAYS"/>
+      </HBox>
+   </VBox>
+
+   <Label fx:id="errorLabel" styleClass="error-label" wrapText="true" minHeight="20"/>
+
+   <!-- Operations -->
+   <VBox spacing="10" alignment="CENTER">
+      <HBox spacing="10" alignment="CENTER">
+         <Button text="ADD" styleClass="operation" onAction="#onAddClick"/>
+         <Button text="SUB" styleClass="operation" onAction="#onSubtractClick"/>
+         <Button text="MUL" styleClass="operation" onAction="#onMultiplyClick"/>
+      </HBox>
+      <HBox spacing="10" alignment="CENTER">
+         <Button text="DIV" styleClass="operation" disable="true"/>
+         <Button text="DER" styleClass="operation" onAction="#onDerivativeClick">
+            <tooltip>
+               <Tooltip text="Derivative of P1"/>
+            </tooltip>
+         </Button>
+         <Button text="INT" styleClass="operation" onAction="#onIntegralClick">
+            <tooltip>
+               <Tooltip text="Integral of P1"/>
+            </tooltip>
+         </Button>
+      </HBox>
+   </VBox>
+
+   <!-- Keypad -->
+   <VBox spacing="5" alignment="CENTER">
+      <HBox spacing="5" alignment="CENTER">
+         <Button text="1" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="2" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="3" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Region prefWidth="12"/>
+         <Button text="0" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="x" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="^" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+      </HBox>
+      <HBox spacing="5" alignment="CENTER">
+         <Button text="4" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="5" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="6" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Region prefWidth="12"/>
+         <Button text="+" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="-" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="del" styleClass="key, key-small" focusTraversable="false" onAction="#onDeleteClick"/>
+      </HBox>
+      <HBox spacing="5" alignment="CENTER">
+         <Button text="7" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="8" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Button text="9" styleClass="key" focusTraversable="false" onAction="#onKeypadClick"/>
+         <Region prefWidth="12"/>
+         <Button text="←" styleClass="key" focusTraversable="false" onAction="#onCaretLeftClick"/>
+         <Button text="→" styleClass="key" focusTraversable="false" onAction="#onCaretRightClick"/>
+         <Button text="C" styleClass="key" focusTraversable="false" onAction="#onClearClick"/>
+      </HBox>
+   </VBox>
+</VBox>
